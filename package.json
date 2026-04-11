@@ -1,0 +1,24 @@
+{
+  "name": "demo-app-simple-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Playwright E2E/API tests for demo-app-simple (local or deployed, e.g. Heroku)",
+  "scripts": {
+    "test": "playwright test",
+    "test:serial": "playwright test --workers=1",
+    "test:ui": "playwright test --project=ui --project=ui-guest",
+    "test:ui:serial": "playwright test --project=ui --project=ui-guest --workers=1",
+    "test:api": "playwright test --project=api",
+    "test:api:serial": "playwright test --project=api --workers=1",
+    "test:headed": "playwright test --headed",
+    "test:headed:serial": "playwright test --headed --workers=1",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2",
+    "dotenv": "^16.4.7",
+    "typescript": "~5.6.3"
+  }
+}
