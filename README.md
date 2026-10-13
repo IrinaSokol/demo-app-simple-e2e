@@ -60,6 +60,14 @@ On **Windows PowerShell**, `npm run … -- --workers=1` often does **not** forwa
 2. Specs call pages/components; avoid raw `data-testid` strings in spec files.
 3. UI tests use `api` + `token` from fixtures for setup/teardown.
 
+## Working with an AI coding agent
+
+[`PLAYWRIGHT_AUDIT.md`](PLAYWRIGHT_AUDIT.md) records how the framework works and what to change; it is the input for the contract.
+
+[`PLAYWRIGHT_AI_CONTRACT.md`](PLAYWRIGHT_AI_CONTRACT.md) describes this architecture as rules an AI agent (e.g. Claude Code) must follow when it creates or changes tests: discover locators from the application source, keep selectors out of specs, reuse Page Objects and Components, use the API for setup, and register new specs in `playwright.config.ts`.
+
+Open this repo and `demo-app-simple` in the same workspace so the agent can read the product code. `CLAUDE.md` points Claude Code at the contract automatically.
+
 ## Alignment with the app
 
 | Topic | Value |
