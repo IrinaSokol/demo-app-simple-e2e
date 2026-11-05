@@ -2,11 +2,6 @@ import { createProjectInput, demoData } from '../fixtures/data.fixture';
 import { expect, test } from '../fixtures/uiTest';
 
 test.describe('UI — Project details (overlay)', () => {
-  test.beforeEach(async ({ api, token }) => {
-    expect(token, 'token for API setup').toBeTruthy();
-    await api.admin.resetDemoData(token!);
-  });
-
   test('opens a project from the list and shows its details', async ({
     page,
     api,

@@ -22,9 +22,14 @@ export type AssetFormInput = {
   status: string;
 };
 
+/** Unique across parallel workers (two workers can share a `Date.now()` millisecond). */
+function uniqueId(): string {
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+}
+
 /** Unique project row for create-flow tests. */
 export function createProjectInput(): ProjectFormInput {
-  const id = Date.now();
+  const id = uniqueId();
   return {
     name: `E2E Project ${id}`,
     owner: `E2E Owner ${id}`,
@@ -34,7 +39,7 @@ export function createProjectInput(): ProjectFormInput {
 
 /** Unique asset row for create-flow tests. */
 export function createAssetInput(): AssetFormInput {
-  const id = Date.now();
+  const id = uniqueId();
   return {
     name: `E2E Asset ${id}`,
     type: 'Laptop',

@@ -32,6 +32,8 @@ export default defineConfig({
         'ui/specs/projects.details.spec.ts',
         'ui/specs/assets.create.spec.ts',
       ],
+      // `api` includes the destructive admin reset spec; it must finish before UI tests start.
+      dependencies: ['api'],
       use: {
         ...devices['Desktop Chrome'],
         storageState: path.join(rootDir, '.auth', 'admin.json'),
@@ -40,6 +42,7 @@ export default defineConfig({
     {
       name: 'ui-guest',
       testMatch: 'ui/specs/auth.login-ui.spec.ts',
+      dependencies: ['api'],
       use: {
         ...devices['Desktop Chrome'],
       },

@@ -16,11 +16,12 @@ type UiFixtures = {
 };
 
 /**
- * UI layer: extends API fixtures so tests can reset data via API and drive the app via pages.
+ * UI layer: extends API fixtures so tests can arrange data via API and drive the app via pages.
+ * Demo data is reset once per run in `globalSetup.ts`, never per test.
  *
  * @example
- * test.beforeEach(async ({ api, token }) => {
- *   await api.admin.resetDemoData(token!);
+ * test('…', async ({ api, token, projectsDashboard }) => {
+ *   await api.projects.createProject(token, createProjectInput());
  * });
  */
 export const test = apiTest.extend<UiFixtures>({

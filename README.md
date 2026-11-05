@@ -1,6 +1,6 @@
 # demo-app-simple — E2E (Playwright)
 
-TypeScript Playwright suite for the **demo-app-simple** app (React + Express demo): **API** specs, **UI** specs, page/component objects, and API setup in `beforeEach` (e.g. seed reset).
+TypeScript Playwright suite for the **demo-app-simple** app (React + Express demo): **API** specs, **UI** specs, page/component objects, and API-based test setup. Demo data is reset once per run in `globalSetup.ts`.
 
 This folder is a **separate npm project** from the app: use a **separate git repository** (e.g. `git init` here and push to its own GitHub repo); do not deploy this project to Heroku. Point tests at **local dev** or at your **deployed** app URL.
 
@@ -60,6 +60,7 @@ On **Windows PowerShell**, `npm run … -- --workers=1` often does **not** forwa
 2. Specs call pages/components; avoid raw `data-testid` strings in spec files.
 3. UI tests use `api` + `token` from fixtures for setup/teardown.
 4. Pages/components expose locators and actions only; assertions (`expect`) live in specs.
+5. Tests run fully in parallel against one shared server: data is reset once per run, never per test, and tests that change data create their own uniquely named records.
 
 ## Working with an AI coding agent
 

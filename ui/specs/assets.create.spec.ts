@@ -2,11 +2,6 @@ import { createAssetInput } from '../fixtures/data.fixture';
 import { expect, test } from '../fixtures/uiTest';
 
 test.describe('UI — Assets create (overlay)', () => {
-  test.beforeEach(async ({ api, token }) => {
-    expect(token, 'token for API setup').toBeTruthy();
-    await api.admin.resetDemoData(token!);
-  });
-
   test('creates an asset via overlay and returns to the list', async ({
     page,
     assetsDashboard,

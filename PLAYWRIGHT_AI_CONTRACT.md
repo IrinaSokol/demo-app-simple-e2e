@@ -79,13 +79,11 @@ Object only for a genuinely new screen or overlay. Register new Page Objects as 
 
 ## 5. Test data and setup
 
-- Every authenticated spec starts from a clean seed:
-  ```ts
-  test.beforeEach(async ({ api, token }) => {
-    expect(token, 'token for API setup').toBeTruthy();
-    await api.admin.resetDemoData(token!);
-  });
-  ```
+- Demo data is reset **once per run** in `globalSetup.ts`. **Never call
+  `api.admin.resetDemoData` from a UI spec** — with parallel workers it wipes data that
+  other tests have just created.
+- **Never modify seed records.** Read-only checks may use seed data (`config/demoSeed.ts`);
+  any test that changes data creates its own record via the API first.
 - **API for arrange, UI for act, UI and API for assert.** Do not click through a create form
   just to build a precondition — add or reuse a method on the matching `api/clients/*Client.ts`.
   API clients take the bearer `token` as an explicit argument on every call.
@@ -126,7 +124,8 @@ Unauthenticated specs belong to the `ui-guest` project instead.
 - Both list endpoints are delayed by 300–800 ms. Call `waitForLoaded()` before asserting on
   table contents, and again after any action that navigates back to a list.
 - No `waitForTimeout`. Use web-first `expect` assertions.
-- `fullyParallel: true` — tests must not depend on each other's data or order.
+- `fullyParallel: true` — tests must not depend on each other's data or order. Every record
+  a test creates gets a unique name from `data.fixture.ts`.
 - Overlays have **no Escape handler and no click-outside-to-close**; only their own buttons
   close them.
 
@@ -135,17 +134,16 @@ Unauthenticated specs belong to the `ui-guest` project instead.
 The target app comes from `.env` (`BASE_URL`, `API_URL`). For a local app (`npm run dev`
 in `../demo-app-simple`) use `BASE_URL=http://localhost:5173` and `API_URL=http://localhost:3001`.
 
-All specs share one in-memory server, and every UI spec resets it in `beforeEach`, so
-parallel workers can wipe each other's data. Run UI specs with a single worker:
-`npx playwright test <spec> --project=ui --workers=1` (or `npm run test:ui:serial`).
-If a test fails only in parallel, do not "fix" it by removing the reset or adding waits —
-report it.
+All specs share one in-memory server and run in parallel. The `ui` and `ui-guest` projects
+depend on `api`, so the destructive admin reset spec finishes before any UI test starts.
+If a test fails only in parallel, look for shared data (§5) — do not "fix" it with waits
+or `--workers=1`.
 
 ## 10. Definition of done
 
 Before reporting the task complete:
 
-1. `npx playwright test <your-spec> --project=ui --workers=1` passes.
+1. `npx playwright test <your-spec> --project=ui` passes, in parallel.
 2. `npx tsc --noEmit -p tsconfig.json` is clean.
 3. No `data-testid`, `getByTestId`, `getByRole` or `page.locator` in `ui/specs/**`, and no
    `expect` in `ui/pages/**` or `ui/components/**`.
