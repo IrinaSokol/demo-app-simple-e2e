@@ -4,6 +4,7 @@ import { ProjectsDashboardPage } from '../pages/dashboards/ProjectsDashboardPage
 import { AssetsDashboardPage } from '../pages/dashboards/AssetsDashboardPage';
 import { CreateProjectPage } from '../pages/create/CreateProjectPage';
 import { CreateAssetPage } from '../pages/create/CreateAssetPage';
+import { ProjectDetailsPage } from '../pages/details/ProjectDetailsPage';
 
 type UiFixtures = {
   loginPage: LoginPage;
@@ -11,6 +12,7 @@ type UiFixtures = {
   assetsDashboard: AssetsDashboardPage;
   createProjectPage: CreateProjectPage;
   createAssetPage: CreateAssetPage;
+  projectDetailsPage: ProjectDetailsPage;
 };
 
 /**
@@ -36,6 +38,9 @@ export const test = apiTest.extend<UiFixtures>({
   },
   createAssetPage: async ({ page }, use) => {
     await use(new CreateAssetPage(page));
+  },
+  projectDetailsPage: async ({ page }, use) => {
+    await use(new ProjectDetailsPage(page));
   },
 });
 

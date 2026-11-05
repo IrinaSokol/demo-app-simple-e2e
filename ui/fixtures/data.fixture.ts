@@ -5,6 +5,8 @@ export const demoData = {
   projectNames: SEED_PROJECT_NAMES,
   assetNames: SEED_ASSET_NAMES,
   primaryProject: 'Demo Project 1',
+  /** Seeded with status `Archived`. */
+  archivedProject: 'Demo Project 3',
   primaryAsset: 'Demo Asset A',
 } as const;
 

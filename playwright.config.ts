@@ -29,6 +29,7 @@ export default defineConfig({
       testMatch: [
         'ui/specs/dashboards*.spec.ts',
         'ui/specs/projects.create.spec.ts',
+        'ui/specs/projects.details.spec.ts',
         'ui/specs/assets.create.spec.ts',
       ],
       use: {

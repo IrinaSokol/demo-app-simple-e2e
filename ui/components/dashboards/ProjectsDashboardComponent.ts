@@ -14,6 +14,11 @@ export class ProjectsDashboardComponent extends BaseDashboardComponent {
     return this.table.rowByText(name);
   }
 
+  /** Clicking a row opens the details overlay (`/projects/:projectId`). */
+  async openProject(name: string): Promise<void> {
+    await this.table.openRow(name);
+  }
+
   async search(text: string): Promise<void> {
     await this.root.getByTestId('projects-search').fill(text);
   }

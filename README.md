@@ -73,7 +73,7 @@ Open this repo and `demo-app-simple` in the same workspace so the agent can read
 
 | Topic | Value |
 |--------|--------|
-| Routes | `/login`, `/projects`, `/projects/new`, `/assets`, `/assets/new` |
+| Routes | `/login`, `/projects`, `/projects/new`, `/projects/:projectId`, `/assets`, `/assets/new` |
 | API | `POST /api/auth/login`, projects/assets CRUD, `POST /api/admin/reset` |
 | Auth | `Authorization: Bearer demo-token` |
 | localStorage | key `auth_token` |
