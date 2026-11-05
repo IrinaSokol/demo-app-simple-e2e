@@ -70,6 +70,8 @@ On **Windows PowerShell**, `npm run … -- --workers=1` often does **not** forwa
 
 Open this repo and `demo-app-simple` in the same workspace so the agent can read the product code. `CLAUDE.md` points Claude Code at the contract automatically.
 
+**Self-review before a PR.** The Claude Code skill [`.claude/skills/sdet-self-review`](.claude/skills/sdet-self-review/SKILL.md) reviews the current branch against the contract and reports findings without changing code. In Claude Code, run `/sdet-self-review` (compares with `main`) or `/sdet-self-review <base-branch>`.
+
 ## Alignment with the app
 
 | Topic | Value |
