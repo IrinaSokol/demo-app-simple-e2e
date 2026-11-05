@@ -10,8 +10,8 @@ export class AssetsDashboardComponent extends BaseDashboardComponent {
     this.table = new DataTableComponent(root.getByTestId('assets-table'));
   }
 
-  async expectHasAsset(name: string): Promise<void> {
-    await this.table.expectRowVisible(name);
+  assetRow(name: string): Locator {
+    return this.table.rowByText(name);
   }
 
   async search(text: string): Promise<void> {

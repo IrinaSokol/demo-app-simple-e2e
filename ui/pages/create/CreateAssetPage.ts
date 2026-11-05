@@ -8,6 +8,8 @@ export type AssetFormData = {
 };
 
 export class CreateAssetPage extends BaseCreateRecordPage {
+  readonly url = /\/assets\/new$/;
+
   constructor(page: Page) {
     super(page);
   }

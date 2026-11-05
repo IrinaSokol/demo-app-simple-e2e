@@ -12,7 +12,7 @@ test.describe('UI — Assets dashboard', () => {
     await assetsDashboard.shell.sidebar.openAssets();
 
     await assetsDashboard.dashboard.waitForLoaded();
-    await assetsDashboard.dashboard.expectTitleContains('Assets');
-    await assetsDashboard.dashboard.expectHasAsset(demoData.primaryAsset);
+    await expect(assetsDashboard.dashboard.title).toContainText('Assets');
+    await expect(assetsDashboard.dashboard.assetRow(demoData.primaryAsset)).toBeVisible();
   });
 });

@@ -12,7 +12,7 @@ test.describe('UI — Projects dashboard', () => {
     await projectsDashboard.shell.sidebar.openProjects();
 
     await projectsDashboard.dashboard.waitForLoaded();
-    await projectsDashboard.dashboard.expectTitleContains('Projects');
-    await projectsDashboard.dashboard.expectHasProject(demoData.primaryProject);
+    await expect(projectsDashboard.dashboard.title).toContainText('Projects');
+    await expect(projectsDashboard.dashboard.projectRow(demoData.primaryProject)).toBeVisible();
   });
 });

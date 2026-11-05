@@ -10,8 +10,8 @@ export class ProjectsDashboardComponent extends BaseDashboardComponent {
     this.table = new DataTableComponent(root.getByTestId('projects-table'));
   }
 
-  async expectHasProject(name: string): Promise<void> {
-    await this.table.expectRowVisible(name);
+  projectRow(name: string): Locator {
+    return this.table.rowByText(name);
   }
 
   async search(text: string): Promise<void> {

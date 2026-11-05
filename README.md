@@ -59,6 +59,7 @@ On **Windows PowerShell**, `npm run … -- --workers=1` often does **not** forwa
 1. Selectors live under `ui/pages` and `ui/components` only.
 2. Specs call pages/components; avoid raw `data-testid` strings in spec files.
 3. UI tests use `api` + `token` from fixtures for setup/teardown.
+4. Pages/components expose locators and actions only; assertions (`expect`) live in specs.
 
 ## Working with an AI coding agent
 

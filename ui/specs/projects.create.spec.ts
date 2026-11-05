@@ -17,17 +17,17 @@ test.describe('UI — Projects create (overlay)', () => {
     await projectsDashboard.dashboard.waitForLoaded();
     await projectsDashboard.openCreateProject();
 
-    await createProjectPage.expectVisible();
-    await createProjectPage.expectUrlContains('/projects/new');
-    await projectsDashboard.expectOpen();
+    await expect(createProjectPage.overlay).toBeVisible();
+    await expect(page).toHaveURL(createProjectPage.url);
+    await expect(projectsDashboard.root).toBeVisible();
 
     const project = createProjectInput();
     await createProjectPage.createProject(project);
 
-    await projectsDashboard.expectUrlIsProjectsList();
-    await createProjectPage.expectHidden();
+    await expect(page).toHaveURL(projectsDashboard.url);
+    await expect(createProjectPage.overlay).toBeHidden();
     await projectsDashboard.dashboard.waitForLoaded();
-    await projectsDashboard.dashboard.expectHasProject(project.name);
+    await expect(projectsDashboard.dashboard.projectRow(project.name)).toBeVisible();
   });
 
   test('Cancel closes overlay and stays on projects list URL', async ({
@@ -40,11 +40,11 @@ test.describe('UI — Projects create (overlay)', () => {
     await projectsDashboard.dashboard.waitForLoaded();
     await projectsDashboard.openCreateProject();
 
-    await createProjectPage.expectOverlayOpen();
+    await expect(createProjectPage.overlay).toBeVisible();
     await createProjectPage.clickCancel();
 
-    await projectsDashboard.expectUrlIsProjectsList();
-    await createProjectPage.expectHidden();
+    await expect(page).toHaveURL(projectsDashboard.url);
+    await expect(createProjectPage.overlay).toBeHidden();
     await projectsDashboard.dashboard.waitForLoaded();
   });
 });

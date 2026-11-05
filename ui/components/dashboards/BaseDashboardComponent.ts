@@ -1,5 +1,4 @@
 import type { Locator } from '@playwright/test';
-import { expect } from '@playwright/test';
 
 /**
  * Shared “dashboard” behavior: loader + title + table test id.
@@ -11,20 +10,16 @@ export class BaseDashboardComponent {
     private readonly tableTestId: string
   ) {}
 
-  /**
-   * Ready when the data table is visible (server adds ~300–800ms delay).
-   * If the loader is still in the DOM, we wait for it to disappear too.
-   */
-  async waitForLoaded(): Promise<void> {
-    await expect(this.root.getByTestId(this.tableTestId)).toBeVisible({
-      timeout: 15_000,
-    });
-    if ((await this.root.getByTestId('dashboard-loader').count()) > 0) {
-      await expect(this.root.getByTestId('dashboard-loader')).toBeHidden();
-    }
+  get title(): Locator {
+    return this.root.getByTestId('dashboard-title');
   }
 
-  async expectTitleContains(text: string): Promise<void> {
-    await expect(this.root.getByTestId('dashboard-title')).toContainText(text);
+  /**
+   * Ready when the data table is visible (server adds ~300–800ms delay) and the loader is gone.
+   * This waits; it does not assert.
+   */
+  async waitForLoaded(): Promise<void> {
+    await this.root.getByTestId(this.tableTestId).waitFor({ state: 'visible', timeout: 15_000 });
+    await this.root.getByTestId('dashboard-loader').waitFor({ state: 'hidden' });
   }
 }

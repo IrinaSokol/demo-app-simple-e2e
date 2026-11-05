@@ -17,17 +17,17 @@ test.describe('UI — Assets create (overlay)', () => {
     await assetsDashboard.dashboard.waitForLoaded();
     await assetsDashboard.openCreateAsset();
 
-    await createAssetPage.expectVisible();
-    await createAssetPage.expectUrlContains('/assets/new');
-    await assetsDashboard.expectOpen();
+    await expect(createAssetPage.overlay).toBeVisible();
+    await expect(page).toHaveURL(createAssetPage.url);
+    await expect(assetsDashboard.root).toBeVisible();
 
     const asset = createAssetInput();
     await createAssetPage.createAsset(asset);
 
-    await assetsDashboard.expectUrlIsAssetsList();
-    await createAssetPage.expectHidden();
+    await expect(page).toHaveURL(assetsDashboard.url);
+    await expect(createAssetPage.overlay).toBeHidden();
     await assetsDashboard.dashboard.waitForLoaded();
-    await assetsDashboard.dashboard.expectHasAsset(asset.name);
+    await expect(assetsDashboard.dashboard.assetRow(asset.name)).toBeVisible();
   });
 
   test('Cancel closes overlay and stays on assets list URL', async ({
@@ -40,11 +40,11 @@ test.describe('UI — Assets create (overlay)', () => {
     await assetsDashboard.dashboard.waitForLoaded();
     await assetsDashboard.openCreateAsset();
 
-    await createAssetPage.expectOverlayOpen();
+    await expect(createAssetPage.overlay).toBeVisible();
     await createAssetPage.clickCancel();
 
-    await assetsDashboard.expectUrlIsAssetsList();
-    await createAssetPage.expectHidden();
+    await expect(page).toHaveURL(assetsDashboard.url);
+    await expect(createAssetPage.overlay).toBeHidden();
     await assetsDashboard.dashboard.waitForLoaded();
   });
 });

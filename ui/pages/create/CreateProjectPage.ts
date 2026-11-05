@@ -8,6 +8,8 @@ export type ProjectFormData = {
 };
 
 export class CreateProjectPage extends BaseCreateRecordPage {
+  readonly url = /\/projects\/new$/;
+
   constructor(page: Page) {
     super(page);
   }
