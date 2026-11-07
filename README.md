@@ -2,6 +2,17 @@
 
 TypeScript Playwright suite for the **demo-app-simple** app (React + Express demo): **API** specs, **UI** specs, page/component objects, and API-based test setup. Demo data is reset once per run in `globalSetup.ts`.
 
+## Video series
+
+This repository is used in a YouTube series. `main` always has the latest version. The code shown in each video is kept in a git tag with the same name in both repositories ([demo-app-simple](https://github.com/IrinaSokol/demo-app-simple) and this one).
+
+| Video | Tag | Topic |
+|---|---|---|
+| 1 | [`video-1`](https://github.com/IrinaSokol/demo-app-simple-e2e/tree/video-1) | Playwright test architecture: Page Objects, Components, fixtures, API helpers |
+| 2 | [`video-2`](https://github.com/IrinaSokol/demo-app-simple-e2e/tree/video-2) | AI-first Playwright: repository audit, AI contract, Claude Code writing tests from the product source |
+
+To get the code from a specific video: `git checkout video-1` (or `video-2`) in both repositories.
+
 This folder is a **separate npm project** from the app: use a **separate git repository** (e.g. `git init` here and push to its own GitHub repo); do not deploy this project to Heroku. Point tests at **local dev** or at your **deployed** app URL.
 
 ## Prerequisites
